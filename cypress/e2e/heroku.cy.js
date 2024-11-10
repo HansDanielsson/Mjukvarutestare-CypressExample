@@ -54,9 +54,22 @@ describe('E2E tester mot HerokuApp', () => {
     // user klickar boxes
     cy.get('input[type="checkbox"]').eq(0).check()
     cy.get('input[type="checkbox"]').eq(1).uncheck()
-    
+
     // Kontrollera state efter ändring
     cy.get('input[type="checkbox"]').eq(0).should('be.checked')
     cy.get('input[type="checkbox"]').eq(1).should('not.be.checked')
+  })
+
+  it('Dropdown menu', () => {
+    cy.get('a[href*="dropdown"]').click()
+
+    // Framme vid select
+    // Välj alternativ 1
+    cy.get('select').select(1)
+    cy.get('select option:selected').should('contains.text', 'Option 1')
+
+    // Välj alternativ 2
+    cy.get('select').select(2)
+    cy.get('select option:selected').should('contains.text', 'Option 2')
   })
 })
